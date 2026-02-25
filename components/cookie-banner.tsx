@@ -38,7 +38,7 @@ export function CookieBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[150] p-4">
-      <div className="max-w-3xl mx-auto bg-card border border-border rounded-xl shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="max-w-3xl mx-auto bg-card border border-border shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4" style={{ borderRadius: "var(--radius)" }}>
         <p className="text-sm text-muted-foreground flex-1">
           We use cookies to analyze site traffic.
           By accepting, you consent to the use of Google Analytics.{" "}

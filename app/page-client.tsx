@@ -37,20 +37,20 @@ const STATS_DATA = [
 ];
 
 const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeOut" as const } },
 };
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.04 } },
 };
 
 function StatCounter({ end, suffix, label }: { end: number; suffix: string; label: string }) {
   const { count, ref } = useCounter(end, 2000, true);
   return (
     <div ref={ref} className="text-center">
-      <p className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground tabular-nums">
+      <p className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-foreground tabular-nums">
         {count.toLocaleString()}
         <span className="text-primary">{suffix}</span>
       </p>
@@ -70,9 +70,9 @@ export default function HomePageClient() {
 
   return (
     <SharedLayout>
-      {/* ═══ HERO ═══ */}
+      {/* === HERO === */}
       <section className="hero-gradient relative pt-16 sm:pt-24 pb-20 sm:pb-32">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -80,7 +80,7 @@ export default function HomePageClient() {
             className="max-w-2xl"
           >
             <motion.div variants={fadeIn} className="flex items-center gap-2 mb-6">
-              <Badge variant="outline" className="rounded-full px-3 py-1 text-xs font-semibold border-primary/30 bg-primary/5 text-foreground gap-1.5">
+              <Badge variant="outline" className="px-3 py-1 text-xs font-semibold border-primary/30 bg-primary/5 text-foreground gap-1.5" style={{ borderRadius: "var(--radius)" }}>
                 <Zap className="w-3 h-3 text-primary" />
                 {t("hero.label")}
               </Badge>
@@ -88,12 +88,12 @@ export default function HomePageClient() {
 
             <motion.h1
               variants={fadeIn}
-              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.08] tracking-tight"
+              className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.08] tracking-tight"
             >
               {t("hero.headline").split("\n").map((line, i) => (
                 <span key={i} className="block">
                   {i === 1 ? (
-                    <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                       {line}
                     </span>
                   ) : line}
@@ -109,13 +109,13 @@ export default function HomePageClient() {
             </motion.p>
 
             <motion.div variants={fadeIn} className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="rounded-full px-6 font-semibold h-11">
+              <Button asChild size="lg" className="px-6 font-semibold h-11" style={{ borderRadius: "var(--radius)" }}>
                 <Link href="/meetups">
                   {t("hero.cta1")}
                   <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full px-6 font-semibold h-11">
+              <Button asChild variant="outline" size="lg" className="px-6 font-semibold h-11" style={{ borderRadius: "var(--radius)" }}>
                 <a href="#features">{t("hero.cta2")}</a>
               </Button>
             </motion.div>
@@ -137,9 +137,9 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ═══ FEATURES ═══ */}
+      {/* === FEATURES === */}
       <section id="features" className="py-20 sm:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -150,7 +150,7 @@ export default function HomePageClient() {
             <motion.span variants={fadeIn} className="section-label">
               {t("features.label")}
             </motion.span>
-            <motion.h2 variants={fadeIn} className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <motion.h2 variants={fadeIn} className="font-heading mt-2 text-3xl sm:text-4xl font-bold tracking-tight">
               {t("features.headline")}
             </motion.h2>
             <motion.p variants={fadeIn} className="mt-3 text-muted-foreground text-lg">
@@ -177,7 +177,7 @@ export default function HomePageClient() {
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-semibold text-sm text-foreground mb-1">
+                    <h3 className="font-heading font-semibold text-sm text-foreground mb-1">
                       {item.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -191,9 +191,9 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ═══ HOW IT WORKS ═══ */}
+      {/* === HOW IT WORKS === */}
       <section className="py-20 sm:py-28 bg-muted/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -204,7 +204,7 @@ export default function HomePageClient() {
             <motion.span variants={fadeIn} className="section-label">
               {t("howItWorks.label")}
             </motion.span>
-            <motion.h2 variants={fadeIn} className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <motion.h2 variants={fadeIn} className="font-heading mt-2 text-3xl sm:text-4xl font-bold tracking-tight">
               {t("howItWorks.headline")}
             </motion.h2>
           </motion.div>
@@ -218,10 +218,13 @@ export default function HomePageClient() {
           >
             {(steps ?? []).map((step, i) => (
               <motion.div key={i} variants={fadeIn} className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-lg font-extrabold text-primary mb-4">
+                <div
+                  className="w-12 h-12 bg-primary/10 flex items-center justify-center text-lg font-bold text-primary mb-4"
+                  style={{ borderRadius: "var(--radius)" }}
+                >
                   {i + 1}
                 </div>
-                <h3 className="font-semibold text-foreground mb-1.5">{step.title}</h3>
+                <h3 className="font-heading font-semibold text-foreground mb-1.5">{step.title}</h3>
                 <p className="text-sm text-muted-foreground max-w-[260px] leading-relaxed">
                   {step.description}
                 </p>
@@ -231,9 +234,9 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ═══ STATS ═══ */}
+      {/* === STATS === */}
       <section className="py-20 sm:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -250,16 +253,17 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
+      {/* === CTA === */}
       <section className="pb-20 sm:pb-28 px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: "easeOut" as const }}
-          className="cta-gradient max-w-4xl mx-auto rounded-3xl px-8 sm:px-14 py-14 sm:py-18 text-center"
+          transition={{ duration: 0.25 }}
+          className="cta-gradient max-w-5xl mx-auto px-8 sm:px-14 py-14 sm:py-18 text-center"
+          style={{ borderRadius: "calc(var(--radius) * 2)" }}
         >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight">
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
             {t("cta.headline")}
           </h2>
           <p className="mt-3 text-sm sm:text-base text-white/75 max-w-md mx-auto">
@@ -268,7 +272,8 @@ export default function HomePageClient() {
           <Button
             asChild
             size="lg"
-            className="mt-6 rounded-full px-7 h-11 text-sm font-semibold bg-white text-foreground hover:bg-white/90 shadow-lg border-0"
+            className="mt-6 px-7 h-11 text-sm font-semibold bg-white text-foreground hover:bg-white/90 shadow-lg border-0"
+            style={{ borderRadius: "var(--radius)" }}
           >
             <Link href="/meetups">
               {t("cta.button")}

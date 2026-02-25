@@ -126,9 +126,9 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
       <section className="hero-gradient py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.25 }}
           >
             <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 text-muted-foreground hover:text-foreground">
               <Link href="/meetups">
@@ -144,7 +144,7 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
               )}
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-6">
+            <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-6">
               {meetup.title}
             </h1>
 
@@ -289,7 +289,8 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
                   <Card className="hover:shadow-sm transition-shadow cursor-pointer group">
                     <CardContent className="flex items-start gap-4 py-5">
                       <div
-                        className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary text-xs font-bold"
+                        className="w-9 h-9 bg-primary/10 flex items-center justify-center shrink-0 text-primary text-xs font-bold"
+                        style={{ borderRadius: "var(--radius)" }}
                         aria-hidden="true"
                       >
                         {thread.avatar}
@@ -335,7 +336,8 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
                       </div>
 
                       <div
-                        className="w-9 h-9 rounded-full bg-muted flex items-center justify-center shrink-0 text-xs font-bold text-muted-foreground"
+                        className="w-9 h-9 bg-muted flex items-center justify-center shrink-0 text-xs font-bold text-muted-foreground"
+                        style={{ borderRadius: "var(--radius)" }}
                         aria-hidden="true"
                       >
                         {participant.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
@@ -365,7 +367,7 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.15 }}
               className="mt-8"
             >
               <Card className="border-dashed">

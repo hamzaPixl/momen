@@ -43,13 +43,13 @@ export default function ContactPageClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             {/* Left column: Contact form */}
             <motion.div
-              initial={{ opacity: 0, x: -24 }}
+              initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" as const }}
+              transition={{ duration: 0.25 }}
             >
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg font-semibold">
+                  <CardTitle className="font-heading text-lg font-semibold">
                     {t("common.sendMessage")}
                   </CardTitle>
                 </CardHeader>
@@ -61,14 +61,14 @@ export default function ContactPageClient() {
 
             {/* Right column: Contact info */}
             <motion.div
-              initial={{ opacity: 0, x: 24 }}
+              initial={{ opacity: 0, x: 12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" as const, delay: 0.1 }}
+              transition={{ duration: 0.25, delay: 0.05 }}
               className="space-y-6"
             >
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg font-semibold">
+                  <CardTitle className="font-heading text-lg font-semibold">
                     {t("common.contact")}
                   </CardTitle>
                 </CardHeader>
@@ -76,13 +76,14 @@ export default function ContactPageClient() {
                   {/* Email */}
                   <div className="flex items-start gap-3">
                     <div
-                      className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center"
+                      className="mt-0.5 flex-shrink-0 w-9 h-9 bg-primary/10 flex items-center justify-center"
+                      style={{ borderRadius: "var(--radius)" }}
                       aria-hidden="true"
                     >
                       <Mail className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-0.5">
+                      <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-0.5">
                         {t("common.email")}
                       </p>
                       <a
@@ -98,13 +99,14 @@ export default function ContactPageClient() {
                   {/* Location */}
                   <div className="flex items-start gap-3">
                     <div
-                      className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center"
+                      className="mt-0.5 flex-shrink-0 w-9 h-9 bg-primary/10 flex items-center justify-center"
+                      style={{ borderRadius: "var(--radius)" }}
                       aria-hidden="true"
                     >
                       <MapPin className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-0.5">
+                      <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-0.5">
                         Location
                       </p>
                       <p className="text-sm text-foreground font-medium">
@@ -116,13 +118,14 @@ export default function ContactPageClient() {
                   {/* Response time */}
                   <div className="flex items-start gap-3">
                     <div
-                      className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center"
+                      className="mt-0.5 flex-shrink-0 w-9 h-9 bg-primary/10 flex items-center justify-center"
+                      style={{ borderRadius: "var(--radius)" }}
                       aria-hidden="true"
                     >
                       <Clock className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-0.5">
+                      <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-0.5">
                         Response time
                       </p>
                       <p className="text-sm text-foreground font-medium">
@@ -136,7 +139,7 @@ export default function ContactPageClient() {
               {/* Social links card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg font-semibold">
+                  <CardTitle className="font-heading text-lg font-semibold">
                     Follow us
                   </CardTitle>
                 </CardHeader>
@@ -152,7 +155,8 @@ export default function ContactPageClient() {
                           aria-label={`Follow us on ${label}`}
                         >
                           <span
-                            className="flex-shrink-0 w-8 h-8 rounded-md bg-muted flex items-center justify-center group-hover:bg-primary/10 transition-colors"
+                            className="flex-shrink-0 w-8 h-8 bg-muted flex items-center justify-center group-hover:bg-primary/10 transition-colors"
+                            style={{ borderRadius: "var(--radius)" }}
                             aria-hidden="true"
                           >
                             <Icon className="w-4 h-4" />

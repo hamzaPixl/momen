@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, ArrowRight, X, Sparkles } from "lucide-react";
+import { Menu, ArrowRight, X } from "lucide-react";
 import { identity } from "@/lib/config";
 import { useTranslate } from "@/hooks/useTranslate";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -41,26 +41,26 @@ export function SharedLayout({ children }: SharedLayoutProps) {
     <div className="min-h-screen bg-background flex flex-col">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-full focus:text-sm focus:font-medium"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-sm focus:text-sm focus:font-medium"
       >
         Skip to content
       </a>
 
-      {/* ─── Header ─── */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto flex items-center justify-between h-14 px-4 sm:px-6">
+      {/* --- Header: solid bar, editorial --- */}
+      <header className="sticky top-0 z-50 w-full border-b-2 border-foreground/10 bg-background">
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-14 px-4 sm:px-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-primary-foreground" />
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-7 h-7 bg-primary flex items-center justify-center" style={{ borderRadius: "var(--radius)" }}>
+              <span className="text-primary-foreground font-bold text-sm leading-none">M</span>
             </div>
-            <span className="text-[15px] font-bold tracking-tight">Momen</span>
+            <span className="font-heading text-[15px] font-bold tracking-tight">Momen</span>
           </Link>
 
-          {/* Desktop nav — centered */}
+          {/* Desktop nav */}
           <nav
             aria-label="Main navigation"
-            className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2"
+            className="hidden md:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2"
           >
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
@@ -68,10 +68,10 @@ export function SharedLayout({ children }: SharedLayoutProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+                  className={`px-3 py-1.5 text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-foreground bg-accent"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {t(link.key)}
@@ -87,7 +87,8 @@ export function SharedLayout({ children }: SharedLayoutProps) {
             <Button
               asChild
               size="sm"
-              className="hidden sm:inline-flex rounded-full text-xs font-semibold px-4 h-8"
+              className="hidden sm:inline-flex text-xs font-semibold px-4 h-8"
+              style={{ borderRadius: "var(--radius)" }}
             >
               <Link href="/meetups">
                 {t("nav.cta")}
@@ -98,7 +99,8 @@ export function SharedLayout({ children }: SharedLayoutProps) {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-accent transition-colors"
+              className="md:hidden w-8 h-8 flex items-center justify-center hover:bg-accent transition-colors"
+              style={{ borderRadius: "var(--radius)" }}
               aria-label="Toggle menu"
             >
               {mobileOpen ? (
@@ -112,8 +114,8 @@ export function SharedLayout({ children }: SharedLayoutProps) {
 
         {/* Mobile nav */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-border/50 bg-background">
-            <nav aria-label="Mobile navigation" className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
+          <div className="md:hidden border-t border-border bg-background">
+            <nav aria-label="Mobile navigation" className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
                 return (
@@ -121,11 +123,12 @@ export function SharedLayout({ children }: SharedLayoutProps) {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`text-sm font-medium py-2.5 px-3 rounded-xl transition-colors ${
+                    className={`text-sm font-medium py-2.5 px-3 transition-colors ${
                       isActive
-                        ? "text-foreground bg-accent"
+                        ? "text-primary font-semibold bg-primary/5"
                         : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                     }`}
+                    style={{ borderRadius: "var(--radius)" }}
                   >
                     {t(link.key)}
                   </Link>
@@ -134,7 +137,8 @@ export function SharedLayout({ children }: SharedLayoutProps) {
               <Button
                 asChild
                 size="sm"
-                className="mt-2 rounded-full text-xs font-semibold"
+                className="mt-2 text-xs font-semibold"
+                style={{ borderRadius: "var(--radius)" }}
                 onClick={() => setMobileOpen(false)}
               >
                 <Link href="/meetups">
@@ -147,29 +151,29 @@ export function SharedLayout({ children }: SharedLayoutProps) {
         )}
       </header>
 
-      {/* ─── Main ─── */}
+      {/* --- Main --- */}
       <main id="main-content" className="flex-1">{children}</main>
 
-      {/* ─── Footer ─── */}
-      <footer className="border-t border-border bg-muted/30 px-4 sm:px-6 py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto">
+      {/* --- Footer: dark, high-contrast, editorial --- */}
+      <footer className="bg-foreground text-background px-4 sm:px-6 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
             {/* Brand */}
             <div className="lg:col-span-2">
-              <Link href="/" className="inline-flex items-center gap-2 mb-3">
-                <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-primary-foreground" />
+              <Link href="/" className="inline-flex items-center gap-2.5 mb-3">
+                <div className="w-7 h-7 bg-primary flex items-center justify-center" style={{ borderRadius: "var(--radius)" }}>
+                  <span className="text-primary-foreground font-bold text-sm leading-none">M</span>
                 </div>
-                <span className="text-[15px] font-bold tracking-tight">Momen</span>
+                <span className="font-heading text-[15px] font-bold tracking-tight text-background">Momen</span>
               </Link>
-              <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
+              <p className="text-sm text-background/60 max-w-sm leading-relaxed">
                 {t("footer.tagline")}
               </p>
             </div>
 
             {/* Pages */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-foreground mb-3">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">
                 {t("footer.pages")}
               </h4>
               <div className="flex flex-col gap-2">
@@ -177,7 +181,7 @@ export function SharedLayout({ children }: SharedLayoutProps) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-background/60 hover:text-background transition-colors"
                   >
                     {t(link.key)}
                   </Link>
@@ -187,20 +191,20 @@ export function SharedLayout({ children }: SharedLayoutProps) {
 
             {/* Contact */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-foreground mb-3">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">
                 {t("common.contact")}
               </h4>
               <a
                 href={`mailto:${identity.contactEmail}`}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-background/60 hover:text-background transition-colors"
               >
                 {identity.contactEmail}
               </a>
             </div>
           </div>
 
-          <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p className="text-xs text-muted-foreground">
+          <div className="mt-10 pt-6 border-t border-background/10 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p className="text-xs text-background/40">
               &copy; {new Date().getFullYear()} {t("footer.copyright")}
             </p>
             <div className="flex gap-4">
@@ -208,7 +212,7 @@ export function SharedLayout({ children }: SharedLayoutProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-xs text-background/40 hover:text-background/70 transition-colors"
                 >
                   {t(link.key)}
                 </Link>
