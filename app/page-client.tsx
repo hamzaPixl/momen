@@ -10,8 +10,8 @@ import {
   UserCircle,
   Bell,
   ArrowRight,
-  ChevronRight,
   Zap,
+  Check,
 } from "lucide-react";
 
 import { SharedLayout } from "@/components/shared-layout";
@@ -19,10 +19,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslate } from "@/hooks/useTranslate";
 import { useCounter } from "@/hooks/useCounter";
-
-// -------------------------------------------------------------------
-// Constants
-// -------------------------------------------------------------------
 
 const FEATURE_ICONS = [
   Presentation,
@@ -40,172 +36,100 @@ const STATS_DATA = [
   { end: 15, suffix: "+", labelKey: "stats.countries" },
 ];
 
-// -------------------------------------------------------------------
-// Animation variants
-// -------------------------------------------------------------------
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
-// -------------------------------------------------------------------
-// Sub-components
-// -------------------------------------------------------------------
-
-function StatCounter({
-  end,
-  suffix,
-  label,
-}: {
-  end: number;
-  suffix: string;
-  label: string;
-}) {
+function StatCounter({ end, suffix, label }: { end: number; suffix: string; label: string }) {
   const { count, ref } = useCounter(end, 2000, true);
-
   return (
-    <div ref={ref} className="text-center" data-testid="stat-counter">
-      <p className="text-4xl sm:text-5xl font-bold text-foreground tabular-nums">
+    <div ref={ref} className="text-center">
+      <p className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground tabular-nums">
         {count.toLocaleString()}
         <span className="text-primary">{suffix}</span>
       </p>
-      <p className="mt-2 text-sm text-muted-foreground font-medium uppercase tracking-widest">
+      <p className="mt-1.5 text-sm text-muted-foreground font-medium">
         {label}
       </p>
     </div>
   );
 }
 
-// -------------------------------------------------------------------
-// Main page
-// -------------------------------------------------------------------
-
 export default function HomePageClient() {
   const { t, tArray, tRaw } = useTranslate();
 
   const badges = tArray("hero.badges");
-  const featureItems = tRaw<{ title: string; description: string }[]>(
-    "features.items"
-  );
-  const steps = tRaw<{ title: string; description: string }[]>(
-    "howItWorks.steps"
-  );
+  const featureItems = tRaw<{ title: string; description: string }[]>("features.items");
+  const steps = tRaw<{ title: string; description: string }[]>("howItWorks.steps");
 
   return (
     <SharedLayout>
-      {/* ================================================================
-          1. HERO SECTION
-      ================================================================ */}
-      <section
-        className="hero-gradient relative min-h-[90vh] flex items-center pt-8 pb-20 sm:pb-28 overflow-hidden"
-        aria-label="Hero"
-        data-testid="hero-section"
-      >
-        {/* Decorative blobs */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-[0.07] dark:opacity-[0.12]"
-          style={{
-            background:
-              "radial-gradient(circle, hsl(263 84% 58%) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.06] dark:opacity-[0.1]"
-          style={{
-            background:
-              "radial-gradient(circle, hsl(50 96% 49%) 0%, transparent 70%)",
-          }}
-        />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full">
+      {/* ═══ HERO ═══ */}
+      <section className="hero-gradient relative pt-16 sm:pt-24 pb-20 sm:pb-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={stagger}
-            className="max-w-3xl"
+            className="max-w-2xl"
           >
-            {/* Label */}
-            <motion.div variants={fadeInUp}>
-              <span className="section-label inline-flex items-center gap-1.5">
-                <Zap className="w-3 h-3" aria-hidden="true" />
+            <motion.div variants={fadeIn} className="flex items-center gap-2 mb-6">
+              <Badge variant="outline" className="rounded-full px-3 py-1 text-xs font-semibold border-primary/30 bg-primary/5 text-foreground gap-1.5">
+                <Zap className="w-3 h-3 text-primary" />
                 {t("hero.label")}
-              </span>
+              </Badge>
             </motion.div>
 
-            {/* Headline */}
             <motion.h1
-              variants={fadeInUp}
-              className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-foreground"
+              variants={fadeIn}
+              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.08] tracking-tight"
             >
-              {t("hero.headline")
-                .split("\n")
-                .map((line, i) => (
-                  <span key={i} className="block">
-                    {i === 1 ? (
-                      <span className="text-primary">{line}</span>
-                    ) : (
-                      line
-                    )}
-                  </span>
-                ))}
+              {t("hero.headline").split("\n").map((line, i) => (
+                <span key={i} className="block">
+                  {i === 1 ? (
+                    <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
+                      {line}
+                    </span>
+                  ) : line}
+                </span>
+              ))}
             </motion.h1>
 
-            {/* Sub */}
             <motion.p
-              variants={fadeInUp}
-              className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed"
+              variants={fadeIn}
+              className="mt-5 text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
               {t("hero.sub")}
             </motion.p>
 
-            {/* CTAs */}
-            <motion.div
-              variants={fadeInUp}
-              className="mt-8 flex flex-wrap gap-3 items-center"
-            >
-              <Button asChild size="lg" className="rounded-full px-6 font-semibold shadow-md">
-                <Link href="/meetups" data-testid="hero-cta1">
+            <motion.div variants={fadeIn} className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg" className="rounded-full px-6 font-semibold h-11">
+                <Link href="/meetups">
                   {t("hero.cta1")}
-                  <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Link>
               </Button>
-
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="rounded-full px-6 font-semibold"
-              >
-                <a href="#features" data-testid="hero-cta2">
-                  {t("hero.cta2")}
-                  <ChevronRight className="w-4 h-4 ml-1" aria-hidden="true" />
-                </a>
+              <Button asChild variant="outline" size="lg" className="rounded-full px-6 font-semibold h-11">
+                <a href="#features">{t("hero.cta2")}</a>
               </Button>
             </motion.div>
 
-            {/* Badges */}
             {badges.length > 0 && (
-              <motion.div
-                variants={fadeInUp}
-                className="mt-8 flex flex-wrap gap-2"
-                aria-label="Feature highlights"
-              >
+              <motion.div variants={fadeIn} className="mt-8 flex flex-wrap gap-2">
                 {badges.map((badge) => (
-                  <Badge
+                  <span
                     key={badge}
-                    variant="outline"
-                    className="rounded-full px-3 py-1 text-xs font-medium border-primary/30 text-foreground bg-primary/5"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
                   >
+                    <Check className="w-3.5 h-3.5 text-primary" />
                     {badge}
-                  </Badge>
+                  </span>
                 ))}
               </motion.div>
             )}
@@ -213,64 +137,47 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ================================================================
-          2. FEATURES SECTION
-      ================================================================ */}
-      <section
-        id="features"
-        className="py-20 sm:py-28 bg-background"
-        aria-labelledby="features-heading"
-        data-testid="features-section"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* Section header */}
+      {/* ═══ FEATURES ═══ */}
+      <section id="features" className="py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="max-w-xl mb-14"
           >
-            <motion.span variants={fadeInUp} className="section-label">
+            <motion.span variants={fadeIn} className="section-label">
               {t("features.label")}
             </motion.span>
-            <motion.h2
-              variants={fadeInUp}
-              id="features-heading"
-              className="mt-3 text-3xl sm:text-4xl font-bold text-foreground"
-            >
+            <motion.h2 variants={fadeIn} className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">
               {t("features.headline")}
             </motion.h2>
-            <motion.p
-              variants={fadeInUp}
-              className="mt-4 text-muted-foreground text-lg"
-            >
+            <motion.p variants={fadeIn} className="mt-3 text-muted-foreground text-lg">
               {t("features.description")}
             </motion.p>
           </motion.div>
 
-          {/* Feature cards grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           >
-            {(featureItems ?? []).map((item, index) => {
-              const Icon = FEATURE_ICONS[index] ?? Presentation;
+            {(featureItems ?? []).map((item, i) => {
+              const Icon = FEATURE_ICONS[i] ?? Presentation;
               return (
                 <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  className="card-hover p-6 flex flex-col gap-4"
-                  data-testid={`feature-card-${index}`}
+                  key={i}
+                  variants={fadeIn}
+                  className="card-hover p-5 flex gap-4"
                 >
-                  <div className="service-icon" aria-hidden="true">
+                  <div className="service-icon shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground text-base mb-1.5">
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-sm text-foreground mb-1">
                       {item.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -284,73 +191,38 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ================================================================
-          3. HOW IT WORKS SECTION
-      ================================================================ */}
-      <section
-        className="py-20 sm:py-28 bg-muted/40"
-        aria-labelledby="how-it-works-heading"
-        data-testid="how-it-works-section"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* Section header */}
+      {/* ═══ HOW IT WORKS ═══ */}
+      <section className="py-20 sm:py-28 bg-muted/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="text-center max-w-xl mx-auto mb-16"
+            className="text-center max-w-lg mx-auto mb-14"
           >
-            <motion.span variants={fadeInUp} className="section-label">
+            <motion.span variants={fadeIn} className="section-label">
               {t("howItWorks.label")}
             </motion.span>
-            <motion.h2
-              variants={fadeInUp}
-              id="how-it-works-heading"
-              className="mt-3 text-3xl sm:text-4xl font-bold text-foreground"
-            >
+            <motion.h2 variants={fadeIn} className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">
               {t("howItWorks.headline")}
             </motion.h2>
           </motion.div>
 
-          {/* Steps */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger}
-            className="relative grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-0"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8"
           >
-            {/* Connecting line — desktop only */}
-            <div
-              aria-hidden="true"
-              className="hidden sm:block absolute top-8 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30"
-            />
-
-            {(steps ?? []).map((step, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="relative flex flex-col items-center text-center px-4 sm:px-6"
-                data-testid={`step-${index}`}
-              >
-                {/* Number circle */}
-                <div
-                  className="relative z-10 w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold text-foreground mb-5 shadow-md"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, hsl(50 96% 49% / 0.18), hsl(263 84% 58% / 0.12))",
-                    border: "2px solid hsl(50 96% 49% / 0.35)",
-                  }}
-                  aria-hidden="true"
-                >
-                  <span className="text-primary font-extrabold">{index + 1}</span>
+            {(steps ?? []).map((step, i) => (
+              <motion.div key={i} variants={fadeIn} className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-lg font-extrabold text-primary mb-4">
+                  {i + 1}
                 </div>
-
-                <h3 className="font-semibold text-foreground text-base mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px]">
+                <h3 className="font-semibold text-foreground mb-1.5">{step.title}</h3>
+                <p className="text-sm text-muted-foreground max-w-[260px] leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
@@ -359,64 +231,48 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ================================================================
-          4. STATS SECTION
-      ================================================================ */}
-      <section
-        className="py-20 sm:py-28 bg-background"
-        aria-label="Platform statistics"
-        data-testid="stats-section"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* ═══ STATS ═══ */}
+      <section className="py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-10"
           >
             {STATS_DATA.map(({ end, suffix, labelKey }) => (
-              <motion.div key={labelKey} variants={fadeInUp}>
-                <StatCounter
-                  end={end}
-                  suffix={suffix}
-                  label={t(labelKey)}
-                />
+              <motion.div key={labelKey} variants={fadeIn}>
+                <StatCounter end={end} suffix={suffix} label={t(labelKey)} />
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ================================================================
-          5. CTA BANNER
-      ================================================================ */}
-      <section
-        className="py-20 sm:py-28 px-4 sm:px-6"
-        aria-label="Call to action"
-        data-testid="cta-section"
-      >
+      {/* ═══ CTA ═══ */}
+      <section className="pb-20 sm:pb-28 px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" as const }}
-          className="cta-gradient max-w-5xl mx-auto rounded-3xl px-8 sm:px-16 py-16 sm:py-20 text-center overflow-hidden"
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
+          className="cta-gradient max-w-4xl mx-auto rounded-3xl px-8 sm:px-14 py-14 sm:py-18 text-center"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight">
             {t("cta.headline")}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-white/75 max-w-md mx-auto">
             {t("cta.description")}
           </p>
           <Button
             asChild
             size="lg"
-            className="mt-8 rounded-full px-8 py-3 text-sm font-semibold bg-white text-foreground hover:bg-white/90 shadow-xl border-0"
+            className="mt-6 rounded-full px-7 h-11 text-sm font-semibold bg-white text-foreground hover:bg-white/90 shadow-lg border-0"
           >
-            <Link href="/meetups" data-testid="cta-button">
+            <Link href="/meetups">
               {t("cta.button")}
-              <ArrowRight className="w-4 h-4 ml-1.5" aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 ml-1.5" />
             </Link>
           </Button>
         </motion.div>

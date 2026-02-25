@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
-import { Playfair_Display } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { Analytics } from "@/components/analytics";
 import { StructuredData } from "@/components/structured-data";
@@ -10,18 +10,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { CookieBanner } from "@/components/cookie-banner";
 
 const baseUrl = "https://meetup.momen.be";
-
-const fontSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const fontSerif = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -97,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontSerif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
