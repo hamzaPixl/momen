@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode — Primary + Secondary accent */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 50 96% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 263 84% 58%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%; /* Derive from primary */
+    --muted-foreground: 0 0% 35%; /* WCAG AA contrast — min 4.5:1 */
+    --accent: 0 0% 96%; /* Derive from primary */
+    --accent-foreground: 50 96% 49%; /* Derive from primary */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%; /* Derive from primary */
+    --input: 0 0% 90%; /* Derive from primary */
+    --ring: 50 96% 49%; /* Derive from primary */
+    --radius: 8px;
+    --chart-1: 50 96% 49%;
+    --chart-2: 263 84% 58%;
+    --chart-3: 0 0% 45%;
+    --chart-4: 0 0% 60%;
+    --chart-5: 0 0% 75%;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 50 96% 49%; /* Derive from primary — lighter in dark */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 263 84% 58%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%; /* Derive from primary */
+    --muted-foreground: 0 0% 75%; /* WCAG AA contrast — min 4.5:1 */
+    --accent: 0 0% 15%; /* Derive from primary */
+    --accent-foreground: 50 96% 49%; /* Derive from primary */
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%; /* Derive from primary */
+    --input: 0 0% 18%; /* Derive from primary */
+    --ring: 50 96% 49%; /* Derive from primary */
+    --chart-1: 50 96% 49%;
+    --chart-2: 263 84% 58%;
+    --chart-3: 0 0% 50%;
+    --chart-4: 0 0% 55%;
+    --chart-5: 0 0% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    font-family: var(--font-serif), Georgia, serif;
+  }
+  p {
+    line-height: 1.75;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* ---- Respect reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Subtle link underline ---- */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ---- Section label style ---- */
+.section-label {
+  @apply font-sans text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-3;
+}
+
+/* ---- Stagger fade-in ---- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* ---- Card hover — premium ---- */
+.card-hover {
+  @apply bg-card rounded-xl border border-border shadow-sm transition-all duration-300;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.card-hover:hover {
+  @apply border-primary/20 -translate-y-1;
+  box-shadow: 0 20px 40px hsl(var(--primary) / 0.08), 0 8px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* ---- Hero gradient — mesh ---- */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 80% 20%, hsl(var(--secondary) / 0.08), transparent),
+    linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--secondary) / 0.06) 50%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 80% 20%, hsl(var(--secondary) / 0.12), transparent),
+    linear-gradient(135deg, hsl(var(--primary) / 0.15) 0%, hsl(var(--secondary) / 0.1) 50%, transparent 100%);
+}
+
+/* ---- Glass ---- */
+.glass {
+  @apply bg-white/80 backdrop-blur-2xl border border-white/90 shadow-lg;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.dark .glass {
+  @apply bg-white/10 border-white/20;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  @apply bg-white/90 backdrop-blur-2xl border border-border shadow-md;
+}
+
+.dark .glass-strong {
+  @apply bg-white/10 border-white/10;
+}
+
+/* ---- Floating nav ---- */
+.nav-pill {
+  @apply bg-white/90 backdrop-blur-xl border border-border shadow-lg;
+}
+
+.dark .nav-pill {
+  @apply bg-neutral-900/90 border-white/10;
+}
+
+/* ---- Stat counter ---- */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- CTA gradient banner — premium ---- */
+.cta-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 50%, hsl(var(--secondary)) 100%);
+  position: relative;
+}
+
+.cta-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ---- Service icon wrapper ---- */
+.service-icon {
+  @apply w-12 h-12 rounded-xl flex items-center justify-center text-primary transition-all duration-300;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--secondary) / 0.08));
+}
+
+/* ---- Section divider ---- */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, hsl(var(--border)) 20%, hsl(var(--border)) 80%, transparent 100%);
+}
