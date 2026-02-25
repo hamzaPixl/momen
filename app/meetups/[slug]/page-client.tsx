@@ -126,9 +126,9 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
       <section className="hero-gradient py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
           >
             <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 text-muted-foreground hover:text-foreground">
               <Link href="/meetups">

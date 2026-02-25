@@ -79,7 +79,7 @@ interface MeetupCardProps {
 function MeetupCard({ meetup, attendeesLabel, resourcesLabel, viewDetailsLabel }: MeetupCardProps) {
   return (
     <motion.div variants={fadeInScale}>
-      <Card className="h-full flex flex-col hover:shadow-hard-primary transition-shadow duration-200">
+      <Card className="h-full flex flex-col hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-0.5">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-3">
             <CardTitle className="font-heading text-lg leading-snug">{meetup.title}</CardTitle>
@@ -160,13 +160,13 @@ export default function MeetupsPageClient() {
           <TabsList className="mb-8" aria-label="Filter meetups by status">
             <TabsTrigger value="upcoming">
               {t("meetupsPage.upcoming")}
-              <span className="ml-2 rounded-sm bg-primary/10 text-primary px-1.5 py-0.5 text-xs font-semibold">
+              <span className="ml-2 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-xs font-semibold">
                 {upcomingMeetups.length}
               </span>
             </TabsTrigger>
             <TabsTrigger value="past">
               {t("meetupsPage.past")}
-              <span className="ml-2 rounded-sm bg-muted text-muted-foreground px-1.5 py-0.5 text-xs font-semibold">
+              <span className="ml-2 rounded-full bg-muted text-muted-foreground px-2 py-0.5 text-xs font-semibold">
                 {pastMeetups.length}
               </span>
             </TabsTrigger>

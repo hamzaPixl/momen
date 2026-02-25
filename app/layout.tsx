@@ -27,7 +27,7 @@ const baseUrl = "https://meetup.momen.be";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#116b4e",
+  themeColor: "#7c3aed",
 };
 
 export const metadata: Metadata = {
