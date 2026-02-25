@@ -1,8 +1,8 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" role="status" aria-busy="true" aria-label="Loading page content">
       {/* Hero skeleton */}
-      <div className="hero-gradient py-16 sm:py-24">
+      <div className="py-16 sm:py-24 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="max-w-3xl space-y-4 animate-pulse">
             <div className="h-4 w-32 bg-muted rounded" />

@@ -123,7 +123,7 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
   return (
     <SharedLayout>
       {/* Hero */}
-      <section className="hero-gradient py-12 sm:py-20">
+      <section className="py-12 sm:py-20 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -144,7 +144,7 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
               )}
             </div>
 
-            <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-6">
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-6">
               {meetup.title}
             </h1>
 
@@ -243,8 +243,8 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
                   <Card className="hover:shadow-sm transition-shadow">
                     <CardContent className="flex items-center justify-between gap-4 py-5">
                       <div className="flex items-start gap-4 min-w-0">
-                        <div className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center shrink-0">
-                          <LinkIcon className="w-5 h-5 text-secondary-foreground" aria-hidden="true" />
+                        <div className="w-10 h-10 rounded bg-muted flex items-center justify-center shrink-0">
+                          <LinkIcon className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
                         </div>
                         <div className="min-w-0">
                           <p className="font-medium text-foreground text-sm leading-snug">{resource.title}</p>
@@ -286,7 +286,7 @@ export default function MeetupDetailPageClient({ meetup }: MeetupDetailPageClien
             >
               {mockDiscussions.map((thread) => (
                 <motion.div key={thread.id} variants={fadeInUp}>
-                  <Card className="hover:shadow-sm transition-shadow cursor-pointer group">
+                  <Card className="hover:shadow-sm transition-shadow cursor-pointer group" tabIndex={0} role="button" onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.currentTarget.click(); }}>
                     <CardContent className="flex items-start gap-4 py-5">
                       <div
                         className="w-9 h-9 bg-primary/10 flex items-center justify-center shrink-0 text-primary text-xs font-bold"

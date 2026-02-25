@@ -1,19 +1,19 @@
 interface WaveDividerProps {
-  variant?: "cream-to-teal" | "teal-to-cream";
+  variant?: "light-to-dark" | "dark-to-light";
   className?: string;
 }
 
 export function WaveDivider({
-  variant = "cream-to-teal",
+  variant = "light-to-dark",
   className = "",
 }: WaveDividerProps) {
   const fills: Record<string, { bg: string; wave: string }> = {
-    "cream-to-teal": {
-      bg: "bg-accent/40",
-      wave: "text-primary",
+    "light-to-dark": {
+      bg: "bg-background",
+      wave: "text-secondary",
     },
-    "teal-to-cream": {
-      bg: "bg-primary",
+    "dark-to-light": {
+      bg: "bg-secondary",
       wave: "text-background",
     },
   };

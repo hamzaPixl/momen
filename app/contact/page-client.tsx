@@ -49,7 +49,7 @@ export default function ContactPageClient() {
             >
               <Card>
                 <CardHeader>
-                  <CardTitle className="font-heading text-lg font-semibold">
+                  <CardTitle className="font-serif text-lg font-semibold">
                     {t("common.sendMessage")}
                   </CardTitle>
                 </CardHeader>
@@ -68,7 +68,7 @@ export default function ContactPageClient() {
             >
               <Card>
                 <CardHeader>
-                  <CardTitle className="font-heading text-lg font-semibold">
+                  <CardTitle className="font-serif text-lg font-semibold">
                     {t("common.contact")}
                   </CardTitle>
                 </CardHeader>
@@ -139,7 +139,7 @@ export default function ContactPageClient() {
               {/* Social links card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="font-heading text-lg font-semibold">
+                  <CardTitle className="font-serif text-lg font-semibold">
                     Follow us
                   </CardTitle>
                 </CardHeader>

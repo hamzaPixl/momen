@@ -82,7 +82,7 @@ function MeetupCard({ meetup, attendeesLabel, resourcesLabel, viewDetailsLabel }
       <Card className="h-full flex flex-col hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-0.5">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-3">
-            <CardTitle className="font-heading text-lg leading-snug">{meetup.title}</CardTitle>
+            <CardTitle className="font-serif text-lg leading-snug">{meetup.title}</CardTitle>
             {meetup.upcoming && (
               <Badge className="shrink-0" variant="default">
                 Upcoming
